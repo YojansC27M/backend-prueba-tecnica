@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from personas import views  # ✅ Esto busca views en la app personas
+from personas.views import EliminarEmpresaView  # Importar la vista de eliminación
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('api/verificar-persona/', views.verificar_persona, name='verificar_persona'),
+    path('api/crear-empresa/', views.crear_empresa, name='crear_empresa'),
+    path('api/crear-persona/', views.crear_persona, name='crear_persona'),
+    path('api/listar-empresas/', views.listar_empresas, name='listar_empresas'),
+    path('api/eliminar-empresa/<int:pk>/', EliminarEmpresaView.as_view(), name='delete'),
 ]
